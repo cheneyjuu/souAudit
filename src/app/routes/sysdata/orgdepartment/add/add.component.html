@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <div class="modal-title">添加部门</div>
+</div>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="bname">部门名称</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-form-explain *ngIf="validateForm.get('bname')?.dirty && validateForm.get('bname')?.errors">
+        请输入部门名称!
+      </nz-form-explain>
+      <input type="text" nz-input formControlName="bname" id="bname">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">当前状态</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <label nz-checkbox formControlName="status" id="status">
+        <span style="color: brown">选中为部门存在，否则为停用</span>
+      </label>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzPush]="16">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid"><i nz-icon nzType="check-circle"
+          nzTheme="outline"></i>
+        确认提交</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

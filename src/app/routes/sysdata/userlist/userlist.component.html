@@ -1,0 +1,39 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="addInfo()" nz-button nzType="primary">
+      <i nz-icon nzType="plus-circle" nzTheme="fill"></i>添加用户</button>
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #filterTable nzSize="small" [nzData]="listOfDisplayData">
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <tr>
+        <th nzWidth="6%">序号</th>
+        <th nzShowSort nzSortKey="unitName" nzShowFilter [nzFilters]="listOfUnitName" (nzFilterChange)="filter($event)"
+          nzWidth="12%">
+          角色类型
+        </th>
+        <th nzWidth="12%">用户姓名</th>
+        <th nzShowSort nzSortKey="bname" nzWidth="18%">所在部门</th>
+        <th nzWidth="25%">联系方式</th>
+        <th nzWidth="10%">登录信息</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of filterTable.data;let i=index;">
+        <td>{{ i+1 }}</td>
+        <td>{{ data.unitName }}</td>
+        <td>{{ data.userName }}</td>
+        <td>{{ data.bname }}</td>
+        <td>{{ data.mob }} , {{ data.email }}</td>
+        <td><a href="#" title="{{ data.userNo }} , {{ data.password }}">查看</a></td>
+        <td>
+          <button nz-button nzSize="small" nzType="default" (click)="editInfo(data)">修改</button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button nz-button nzSize="small" nzType="danger" (click)="deleteConfirm(data.id)">删除</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

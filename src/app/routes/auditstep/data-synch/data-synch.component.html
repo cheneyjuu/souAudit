@@ -1,0 +1,162 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <!-- <button (click)="add()" nz-button nzType="primary">新建</button> -->
+  </ng-template>
+</page-header>
+<nz-card>
+  <!-- <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
+  <st #st [data]="url" [columns]="columns"></st> -->
+  <nz-table #nzTable nzSize="middle" [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzShowExpand nzwidth="4%"></th>
+        <th nzWidth="20%">数据表中文名称</th>
+        <th nzWidth="20%">英文名称</th>
+        <th nzWidth="10%">数据条数</th>
+        <th nzWidth="30%">数据说明</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nzTable.data">
+        <tr>
+          <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.id]"></td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.enname }}</td>
+          <td>{{ data.age }}</td>
+          <td>{{ data.address }}</td>
+          <td>
+            <button nz-button nzSize="small" nzType="default" (click)="open()">即时更新</button>
+            <button nz-button nzSize="small" nzType="default" (click)="open1()">统计分析</button>
+          </td>
+        </tr>
+        <tr [nzExpand]="mapOfExpandData[data.id]">
+          <td></td>
+          <td colspan="6">
+            <!-- <p><img style="width:900px;height:270px " src="./assets/chartbar.jpg" /></p> -->
+            <!-- <div nz-row nzGutter="16">
+              <div nz-col nzXs="24" nzMd="12">
+                数据统计结果表
+              </div>
+              <div nz-col nzXs="24" nzMd="12">
+                图表：条形图、拼图等
+              </div>
+            </div> -->
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+</nz-card>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="更新结果" [nzWidth]="4500"
+  (nzOnClose)="close()">
+  <p>1 连接数据库成功</p>
+  <p>2 开始同步...</p>
+  <p>3 已完成890条数据</p>
+  <p>4 同步成功</p>
+  <p>5 数据版本：20190709101231log</p>
+</nz-drawer>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="bvisible" nzPlacement="bottom" nzTitle="数据分析统计结果" [nzHeight]="330"
+  (nzOnClose)="close1()">
+  <!-- <p><img style="width:900px;height:270px " src="./assets/chartbar.jpg" /></p> -->
+  <div nz-row nzGutter="24">
+    <div nz-col nzSm="16">
+      <nz-table nzTemplateMode #borderedTable nzBordered nzSize="small">
+        <thead>
+          <tr>
+            <th rowspan="3">年份</th>
+            <th colspan="8">学历教育</th>
+            <th colspan="2" rowspan="2">非学历教育</th>
+            <th colspan="2" rowspan="2">社区教育</th>
+            <th colspan="2" rowspan="2">其他</th>
+            <th rowspan="3">合计</th>
+          </tr>
+          <tr>
+            <th colspan="2">市区分校</th>
+            <th colspan="2">郊区分校</th>
+            <th colspan="2">行业分校</th>
+            <th rowspan="2">小计</th>
+            <th rowspan="2">比例</th>
+          </tr>
+          <tr>
+            <th>数量</th>
+            <th>比例</th>
+            <th>数量</th>
+            <th>比例</th>
+            <th>数量</th>
+            <th>比例</th>
+            <th>数量</th>
+            <th>比例</th>
+            <th>数量</th>
+            <th>比例</th>
+            <th>数量</th>
+            <th>比例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2016年</td>
+            <td>4544</td>
+            <td>28.79%</td>
+            <td>3321</td>
+            <td>21.04%</td>
+            <td>3113</td>
+            <td>19.73%</td>
+            <td>10206</td>
+            <td>69.56%</td>
+            <td>2341</td>
+            <td>14.83%</td>
+            <td>1231</td>
+            <td>7.80%</td>
+            <td>1231</td>
+            <td>7.80%</td>
+            <td>15009</td>
+          </tr>
+          <tr>
+            <td>2017年</td>
+            <td>4544</td>
+            <td>28.79%<span class="nzColor:#F00">↑</span></td>
+            <td>3321</td>
+            <td>21.04%<span class="nzColor:#F00">↑</span></td>
+            <td>3113</td>
+            <td>19.73%<span class="nzColor:#F00">↓</span></td>
+            <td>10206</td>
+            <td>69.56%<span class="nzColor:#F00">↓</span></td>
+            <td>2341</td>
+            <td>14.83%<span class="nzColor:#F00">-</span></td>
+            <td>1231</td>
+            <td>7.80%<span class="nzColor:#F00">-</span></td>
+            <td>1231</td>
+            <td>7.80%<span class="nzColor:#F00">↑</span></td>
+            <td>15009<span class="nzColor:#F00">↑</span></td>
+          </tr>
+          <tr>
+            <td>2018年</td>
+            <td>4544</td>
+            <td>28.79%<span class="nzColor:#F00">↑</span></td>
+            <td>3321</td>
+            <td>21.04%<span class="nzColor:#F00">↑</span></td>
+            <td>3113</td>
+            <td>19.73%<span class="nzColor:#F00">↓</span></td>
+            <td>10206</td>
+            <td>69.56%<span class="nzColor:#F00">↓</span></td>
+            <td>2341</td>
+            <td>14.83%<span class="nzColor:#F00">-</span></td>
+            <td>1231</td>
+            <td>7.80%<span class="nzColor:#F00">-</span></td>
+            <td>1231</td>
+            <td>7.80%<span class="nzColor:#F00">↑</span></td>
+            <td>15009<span class="nzColor:#F00">↑</span></td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <div nz-col nzSm="8">
+      <g2-pie [hasLegend]="true" title="学生数" subTitle="学生数" [total]="total" [data]="salesPieData" height="180"></g2-pie>
+    </div>
+  </div>
+
+
+</nz-drawer>

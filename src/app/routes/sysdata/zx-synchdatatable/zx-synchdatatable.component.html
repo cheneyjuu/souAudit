@@ -1,0 +1,41 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <!-- <button (click)="addInfo()" nz-button nzType="primary">新增数据表</button> -->
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #nzTable nzSize="small" [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzShowExpand nzwidth="5%"></th>
+        <th nzWidth="30%">填报表名称</th>
+        <th nzWidth="20%">数据表名称</th>
+        <th nzWidth="8%">字段数</th>
+        <th nzWidth="19%">最后修订时间</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nzTable.data">
+        <tr>
+          <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.id]"></td>
+          <td>{{ data.dtName }}</td>
+          <td>{{ data.dtNo }}</td>
+          <td>{{ data.fieldsNum }}</td>
+          <td>{{ data.modTime }}</td>
+          <td>
+            <button nz-button nzSize="small" nzType="default" (click)="viewInfo(data)">view</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzSize="small" nzType="default" (click)="editInfo(data)">修改</button>
+            <!-- <nz-divider nzType="vertical"></nz-divider>
+              <button nz-button nzSize="small" nzType="danger" (click)="deleteConfirm(data.id)">删除</button> -->
+          </td>
+        </tr>
+        <tr [nzExpand]="mapOfExpandData[data.id]">
+          <td></td>
+          <td colspan="6">{{ data.descRules }}</td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+</nz-card>

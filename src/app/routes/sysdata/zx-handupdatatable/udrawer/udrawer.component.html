@@ -1,0 +1,28 @@
+<form nz-form>
+  <div sv-container>
+    <div nz-row>
+      {{ value.tableHtml }}
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col nzSpan="24">
+        <div class="item-wrap">
+          {{ value.descRules }}
+        </div>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <p class="title" style="color: red">数据校验规则</p>
+    <div nz-row>
+      <div nz-col nzSpan="24">
+        <div class="item-wrap">
+          {{ value.checkRules }}
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- <div class="footer">
+  <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>取消</span></button>
+  <button type="button" (click)="close()" class="ant-btn ant-btn-primary"><span>确认</span></button>
+</div> -->

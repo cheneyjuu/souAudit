@@ -1,0 +1,35 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="addInfo()" nz-button nzType="primary">添加分校</button>
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #branchTable nzSize="small" nzBordered [nzData]="listOfDisplayData">
+    <thead>
+      <tr>
+        <th nzWidth="12%" nzShowSort nzSortKey="bname">分校代码</th>
+        <th nzWidth="18%">分校名称</th>
+        <th nzWidth="12%" nzShowFilter [nzFilters]="listOfType" (nzFilterChange)="filter($event)">类别</th>
+        <th nzWidth="20%">评估人员</th>
+        <th nzWidth="20%">联系方式</th>
+        <th nzWidth="8%">存续状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of branchTable.data;let i=index;">
+        <td>{{ data.bno }} </td>
+        <td>{{ data.bname }} </td>
+        <td>{{ data.btype }} </td>
+        <td></td>
+        <td></td>
+        <td><span [ngClass]="{'text-danger':data.status==false}">{{ data.status?'在用':'停用' }}</span></td>
+        <td>
+          <button nz-button nzSize="small" nzType="default" (click)="editInfo(data)">修改</button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button nz-button nzSize="small" nzType="danger" (click)="deleteConfirm(data.id)">删除</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

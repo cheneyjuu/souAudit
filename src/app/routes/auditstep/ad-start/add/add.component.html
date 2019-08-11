@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <div class="modal-title">新增评估任务</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired>评估名称</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请输入评估名称！">
+      <input id="appName" type="text" nz-input formControlName="appName" style="width: 450px;">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired>适用体系</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请选择适用评估体系！">
+      <nz-select formControlName="verIndex" (ngModelChange)="esFromChange($event)" style="width: 450px;"
+        nzPlaceHolder="请选择适用评估体系">
+        <nz-option *ngFor="let p of listOfVer" [nzValue]="p.verIndex" [nzLabel]="p.esName"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired>评估起讫日期</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请选择评估起讫日期！">
+      <nz-date-picker formControlName="startDate" [nzFormat]="dateFormat"></nz-date-picker>
+      &nbsp;&nbsp;至&nbsp;&nbsp;
+      <nz-date-picker formControlName="endDate" [nzFormat]="dateFormat"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired>评估数据周期</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请选择评估数据周期！">
+      <nz-date-picker formControlName="dataFromDate" [nzFormat]="dateFormat"></nz-date-picker>
+      &nbsp;&nbsp;至&nbsp;&nbsp;
+      <nz-date-picker formControlName="dataEndDate" [nzFormat]="dateFormat"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">是否总校评估</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <label nz-checkbox formControlName="isZx" id="isZx">
+        <span style="color: brown">选中为总校开展评估，否则为针对分校评估</span>
+      </label>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzPush]="16">
+      <button nz-button nzType="primary"><i nz-icon nzType="check-circle" nzTheme="outline"></i> 确认提交</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

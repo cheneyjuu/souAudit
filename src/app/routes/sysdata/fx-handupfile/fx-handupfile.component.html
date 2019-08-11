@@ -1,0 +1,39 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="addInfo()" nz-button nzType="primary">
+      <i nz-icon nzType="plus-circle" nzTheme="fill"></i>
+      文字单片材料</button>
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #nzTable nzSize="small" [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzShowExpand nzwidth="2%"></th>
+        <th nzWidth="12%">评估类别</th>
+        <th nzWidth="30%">文字资料名称</th>
+        <th>资料内容说明</th>
+        <th nzWidth="12%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nzTable.data">
+        <tr>
+          <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.id]"></td>
+          <td>{{ data.esType }}</td>
+          <td>{{ data.fileName }}</td>
+          <td>{{ data.remark }}</td>
+          <td>
+            <button nz-button nzSize="small" nzType="default" (click)="editInfo(data)">修改</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzSize="small" nzType="danger" (click)="deleteConfirm(data.id)">删除</button>
+          </td>
+        </tr>
+        <tr [nzExpand]="mapOfExpandData[data.id]">
+          <td></td>
+          <td colspan="6">最后修改时间：{{ data.modTime }}<br>{{ data.modRecords }}</td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+</nz-card>

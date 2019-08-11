@@ -1,0 +1,32 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <!-- <button (click)="add()" nz-button nzType="primary">新建</button> -->
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #filterTable nzSize="small" [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzWidth="10%">菜单id</th>
+        <th nzWidth="15%">菜单名称</th>
+        <th nzWidth="15%">上级菜单id</th>
+        <th nzWidth="18%">路由链接</th>
+        <th nzWidth="12%">图标</th>
+        <th nzWidth="10%">排序</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of filterTable.data">
+        <td>{{ data.menuKey }}</td>
+        <td>{{ data.text }}</td>
+        <td>{{ data.parentName }}</td>
+        <td>{{ data.link }}</td>
+        <td>{{ data.icon }}</td>
+        <td>{{ data.order }}</td>
+        <td>
+          <button nz-button nzSize="small" nzType="default" (click)="openInfo(data.id)">查看</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

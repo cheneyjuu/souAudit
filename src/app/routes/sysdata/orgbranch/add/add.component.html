@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <div class="modal-title">添加分校</div>
+</div>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="bno" nzRequired>分校代码</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请输入分校代码!">
+      <input id="bno" type="text" nz-input formControlName="bno" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="bname" nzRequired>分校名称</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请输入分校名称!">
+      <input id="bname" type="text" nz-input formControlName="bname" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">分校类别</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-checkbox-group formControlName="checkOptionsOne" (ngModelChange)="checkOptionsOneChange(checkOptionsOne)">
+      </nz-checkbox-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">当前状态</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <label nz-checkbox formControlName="status" id="status">
+        <span style="color: brown">选中为分校存在，否则为停用</span>
+      </label>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzPush]="16">
+      <button nz-button nzType="primary"><i nz-icon nzType="check-circle" nzTheme="outline"></i>
+        确认提交</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

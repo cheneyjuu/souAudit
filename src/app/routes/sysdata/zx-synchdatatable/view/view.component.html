@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <div class="modal-title">{{ record.dtName }} </div>
+</div>
+<div sv-container>
+  <div nz-row [innerHTML]="Catcha">
+  </div>
+  <nz-divider></nz-divider>
+  <p class="title">数据填写规则</p>
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <div class="item-wrap">
+        {{record.descRules}}
+      </div>
+    </div>
+  </div>
+  <nz-divider></nz-divider>
+  <p class="title">数据校验规则</p>
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <div class="item-wrap">
+        {{record.checkRules}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <div class="modal-title">【{{ activeNode.title }}】 指标属性设置</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>指标内涵</nz-form-label>
+    <nz-form-control [nzSpan]="18" nzFor="remark" nzErrorTip="请输入指标内涵！">
+      <textarea formControlName="remark" id="remark" type="text" nz-input style="width: 750px;" rows="7"> </textarea>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>责任部门</nz-form-label>
+    <nz-form-control [nzSpan]="18" nzFor="dutyDept" nzErrorTip="请选择责任部门，可多选！">
+      <!-- [(ngModel)]="listOfSelectedDept" -->
+      <!-- [ngModelOptions]="{ standalone: true }" -->
+      <nz-select
+        nzMode="multiple"
+        formControlName="dutyDept"
+        (ngModelChange)="esFromChange($event)"
+        nzPlaceHolder="总校评估可选择部门；分校评估无需选择部门！"
+        style="width: 638px;"
+      >
+        <nz-option *ngFor="let p of listOfDept" [nzLabel]="p.bname" [nzValue]="p.id"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzPush]="16">
+      <button nz-button nzType="primary"><i nz-icon nzType="check-circle" nzTheme="outline"></i> 确认提交</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

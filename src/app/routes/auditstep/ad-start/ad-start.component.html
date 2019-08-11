@@ -1,0 +1,55 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="addInfo()" nz-button nzType="primary">
+      <i nz-icon nzType="plus-circle" nzTheme="fill"></i>
+      评估任务</button>
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #nzTable nzSize="middle" [nzData]="listOfData" nzPageSize="5">
+    <thead>
+      <tr>
+        <th nzWidth="5%" nzAlign="center">年份</th>
+        <th nzWidth="10%" nzAlign="center">评估类别</th>
+        <th nzWidth="28%">评估名称</th>
+        <th nzWidth="8%" nzAlign="center">起讫时间</th>
+        <th nzWidth="8%" nzAlign="center">评估周期</th>
+        <th nzWidth="25%" nzAlign="center">适用评估指标体系版本</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nzTable.data">
+        <tr>
+          <td nzAlign="center">{{ data.inTime.substring(0,4) }}</td>
+          <td nzAlign="center">{{ data.esType }}</td>
+          <td>{{ data.appName }}</td>
+          <td nzAlign="center">{{ data.startDate }}<br>{{ data.endDate }}</td>
+          <td nzAlign="center">{{ data.dataFromDate }}<br>{{ data.dataEndDate }}</td>
+          <td>{{ data.esName }}【{{ data.verIndex }}】</td>
+          <td>
+            <button nz-button nzSize="small" nzType="primary" (click)="open()">Report</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzSize="small" nzType="default" (click)="editInfo(data)">修改</button>
+            <button nz-button nzSize="small" nzType="danger" (click)="deleteConfirm(data.id)">删除</button>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+</nz-card>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="评估结果" [nzWidth]="420"
+  (nzOnClose)="close()">
+  <p>上海开放大学办学水平评估报告（2019年）</p><br>
+  <p>上海开放大学 - 浦东东校办学水平评估报告（2019年）</p>
+  <p>上海开放大学 - 黄埔分校办学水平评估报告（2019年）</p>
+  <p>上海开放大学 - 青浦分校办学水平评估报告（2019年）</p>
+  <p>上海开放大学 - 徐汇分校办学水平评估报告（2019年）</p>
+  <p>上海开放大学 - 松江办学水平评估报告（2019年）</p><br><br>
+  <p>上海开放大学 - 外经贸分校办学水平评估报告（2019年）</p>
+  <p>上海开放大学 - 外经贸分校办学水平评估报告（2019年）</p>
+  <p>上海开放大学 - 外经贸分校办学水平评估报告（2019年）</p>
+  <p>上海开放大学 - 外经贸分校办学水平评估报告（2019年）</p><br><br>
+  <p>上海开放大学 - 专业建设评估报告（2019年）</p>
+</nz-drawer>

@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <div class="modal-title">编辑 {{ record.unitName }} 信息</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="unitNo" nzRequired>角色代码</nz-form-label>
+    <nz-form-control [nzSpan]="14">{{record.unitNo}}</nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="unitName" nzRequired>角色名称</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请输入角色名称">
+      <input id="unitName" type="text" nz-input formControlName="unitName" value="{{record.unitName}}" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="unitType">角色类别</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请选择角色类别">
+      <nz-select id="unitType" formControlName="unitType" nzPlaceHolder="请选择角色类别">
+        <nz-option nzValue="总校" nzLabel="总校" selected></nz-option>
+        <nz-option nzValue="分校" nzLabel="分校"></nz-option>
+        <nz-option nzValue="专家" nzLabel="专家"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="remark">角色说明</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请输入密码">
+      <input id="remark" type="text" nz-input formControlName="remark" placeholder="角色主要工作描述"
+        value="{{record.remark}}" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzPush]="16">
+      <button nz-button nzType="primary"><i nz-icon nzType="check-circle" nzTheme="outline"></i>
+        确认提交</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

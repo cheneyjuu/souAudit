@@ -1,0 +1,64 @@
+<div class="modal-header">
+  <div class="modal-title">编辑【 {{ record.userName }}】信息</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired>用户姓名</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请输入姓名！">
+      <input id="userName" type="text" nz-input formControlName="userName" value="{{record.userName}}"
+        style="width: 200px;">
+      <nz-divider nzType="vertical"></nz-divider>
+      <nz-select id="unitNo" formControlName="unitNo" [(ngModel)]="selectedUnitNo" style="width: 200px;"
+        nzPlaceHolder="请选择角色">
+        <nz-option *ngFor="let option of listOfUnit" [nzLabel]="option.unitName" [nzValue]="option.unitNo"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">用户类别</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select id="userFrom" formControlName="userFrom" style="width: 200px;" [(ngModel)]="selectedUserFrom"
+        (ngModelChange)="userFromChange($event)">
+        <nz-option *ngFor="let p of checkOptions" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
+      </nz-select>
+      <nz-divider nzType="vertical"></nz-divider>
+      <nz-select id="bno" style="width: 200px;" formControlName="bno" [(ngModel)]="selectedDB" nzPlaceHolder="请先选择类别">
+        <nz-option *ngFor="let option of listOfDB" [nzLabel]="option.bname" [nzValue]="option.bno"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">联系电话</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input id="mob" type="text" nz-input formControlName="mob" value="{{record.mob}}" style="width: 137px;">（Mob）
+      <nz-divider nzType="vertical"></nz-divider>
+      <input id="offPhone" type="text" nz-input formControlName="offPhone" value="{{record.offPhone}}"
+        style="width: 140px;">（Off）
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">E-mail</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="输入Email格式有误！">
+      <input id="email" type="text" nz-input formControlName="email" value="{{record.email}}" style="width: 415px;">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="userNo" nzRequired>登录账号</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="请输入登录账号！">
+      <input id="userNo" type="text" nz-input formControlName="userNo" value="{{record.userNo}}" style="width: 415px;">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">当前状态</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <label nz-checkbox formControlName="status" id="status" [nzChecked]="1">
+        <span style="color: brown">选中为用户存在，否则为停用</span>
+      </label>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzPush]="16">
+      <button nz-button nzType="primary"><i nz-icon nzType="check-circle" nzTheme="outline"></i> 确认提交</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

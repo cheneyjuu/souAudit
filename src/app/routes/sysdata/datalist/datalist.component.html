@@ -1,0 +1,31 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <!-- <button (click)="add()" nz-button nzType="primary">新建</button> -->
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+    <nz-tab *ngFor="let tab of tabs; let i = index;" [nzTitle]="tab" (nzClick)="changeDataSet(i)">
+      <nz-table #borderedTable nzBordered #chargeTable nzSize="small" [nzData]="showDatas" [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th nzWidth="6%">序号</th>
+            <th nzWidth="15%">类别代码</th>
+            <th nzWidth="15%">类别名称</th>
+            <th nzWidth="20%">数据项代码</th>
+            <th>数据项名称</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of chargeTable.data; let j = index">
+            <td>{{ j+1 }}</td>
+            <td>{{ data.typeNo }}</td>
+            <td>{{ data.typeName }}</td>
+            <td>{{ data.dataTypeIndex  }}</td>
+            <td>{{ data.dataTypeName }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-tab>
+  </nz-tabset>
+</nz-card>

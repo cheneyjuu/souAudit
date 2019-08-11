@@ -1,0 +1,50 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="addInfo()" nz-button nzType="primary">
+      <i nz-icon nzType="plus-circle" nzTheme="fill"></i>
+      评估体系</button>
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #nzTable nzSize="middle" [nzData]="listOfData" nzPageSize="6">
+    <thead>
+      <tr>
+        <th nzShowExpand nzwidth="2%"></th>
+        <th nzWidth="10%" nzAlign="center">评估类别</th>
+        <th nzWidth="30%">评估体系名称</th>
+        <th nzWidth="7%" nzAlign="center">实施年月</th>
+        <th nzWidth="6%" nzAlign="center">是否在用</th>
+        <th nzAlign="center">数据采集周期</th>
+        <th nzWidth="13%" nzAlign="center">指标体系版本</th>
+        <th nzWidth="17%" nzAlign="center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nzTable.data">
+        <tr>
+          <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.id]"></td>
+          <td>{{ data.esType }}</td>
+          <td><a (click)="viewInfo(data)">{{ data.esName }}</a></td>
+          <td nzAlign="center">{{ data.releaseDate }}</td>
+          <td nzAlign="center">
+            <span [ngClass]="{'text-danger':data.status==false}">{{ data.status?'在用':'停用' }}</span>
+          </td>
+          <td nzAlign="center">{{ data.dataFromDate }}∽{{ data.dataEndDate }}</td>
+          <td nzAlign="center">{{ data.verIndex }}</td>
+          <td nzAlign="center">
+            <button nz-button nzSize="small" nzType="primary" (click)="openComponent(data)">
+              <i nz-icon nzType="unordered-list" nzTheme="outline"></i> 指标
+            </button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzSize="small" nzType="default" (click)="editInfo(data)">修改</button>
+            <button nz-button nzSize="small" nzType="danger" (click)="deleteConfirm(data.id)">删除</button>
+          </td>
+        </tr>
+        <tr [nzExpand]="mapOfExpandData[data.id]">
+          <td></td>
+          <td colspan="8">最后一次修订时间：{{ data.lastModTime }}</td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+</nz-card>

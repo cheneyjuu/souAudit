@@ -1,0 +1,40 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="addInfo()" nz-button nzType="primary">新建角色</button>
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #filterTable nzSize="small" [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzWidth="10%">角色类别</th>
+        <th nzWidth="8%">角色代码</th>
+        <th nzWidth="15%">角色名称</th>
+        <th>权限说明</th>
+        <th nzWidth="20%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of filterTable.data">
+        <td>{{ data.unitType }}</td>
+        <td>{{ data.unitNo }}</td>
+        <td>{{ data.unitName }}</td>
+        <td>{{ data.remark }}</td>
+        <td>
+          <button nz-button nzSize="small" nzType="primary" (click)="openComponent(data)">
+            <i nz-icon nzType="setting"></i>设置</button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button nz-button nzSize="small" nzType="default" (click)="editInfo(data)">修改</button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button nz-button nzSize="small" nzType="danger" (click)="deleteConfirm(data.id)">删除</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <!-- <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+    [nzMaskClosable]="false" [nzWidth]="390" [nzVisible]="visible" id="drawerPlat" nzTitle="权限设置"
+    (nzOnClose)="closeDrawer()">
+  </nz-drawer> -->
+
+</nz-card>

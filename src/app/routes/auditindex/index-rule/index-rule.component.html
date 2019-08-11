@@ -1,0 +1,50 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="add()" nz-button nzType="primary">新建</button>
+  </ng-template>
+</page-header>
+<nz-card>
+  <nz-table #nzTable nzSize="middle" [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzShowExpand nzwidth="3%"></th>
+        <th nzWidth="12%">评估类别</th>
+        <th nzWidth="30%">评估体系名称</th>
+        <th nzWidth="10%">开始实施年月</th>
+        <th nzWidth="7%">是否在用</th>
+        <th nzWidth="8%">数据采集周期</th>
+        <th nzWidth="18%">指标体系版本</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nzTable.data">
+        <tr>
+          <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.id]"></td>
+          <td>{{ data.adType }}</td>
+          <td>{{ data.adName }}</td>
+          <td>{{ data.adYear }}</td>
+          <td>{{ data.adStatus }}</td>
+          <td>{{ data.adTimeline }}</td>
+          <td>{{ data.adVerion }}</td>
+          <td>
+            <button nz-button nzSize="small" nzType="default" (click)="open()">评估规则</button>
+          </td>
+        </tr>
+        <tr [nzExpand]="mapOfExpandData[data.id]">
+          <td></td>
+          <td colspan="8">
+
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+</nz-card>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="评估规则" [nzWidth]="420"
+  (nzOnClose)="close()">
+  <p>上海开放大学办学水平评估报告（2019年）-范文</p><br><br>
+  <p>上海开放大学 - 分校办学水平评估报告（2019年）-范文</p><br><br>
+  <p>上海开放大学 - 专业建设评估报告（2019年）-范文</p>
+</nz-drawer>

@@ -1,0 +1,12 @@
+<form nz-form>
+  <div nz-row nzGutter="8">
+    <nz-tree [nzData]="nodes" nzCheckable nzMultiple [nzCheckedKeys]="defaultCheckedKeys"
+      [nzExpandedKeys]="defaultExpandedKeys" [nzSelectedKeys]="defaultSelectedKeys" (nzClick)="nzEvent($event)"
+      (nzExpandChange)="nzEvent($event)" (nzCheckBoxChange)="nzEvent($event)">
+    </nz-tree>
+  </div>
+</form>
+<div class="footer">
+  <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>取消</span></button>
+  <button type="button" (click)="submitTree()" class="ant-btn ant-btn-primary"><span>确认</span></button>
+</div>

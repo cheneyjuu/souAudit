@@ -1,0 +1,135 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <!-- <button (click)="add()" nz-button nzType="primary">新建</button> -->
+  </ng-template>
+</page-header>
+<nz-card>
+  <!-- <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
+    <st #st [data]="url" [columns]="columns"></st> -->
+  <nz-table #nzTable nzSize="middle" [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzShowExpand nzwidth="4%"></th>
+        <th nzWidth="20%">填报表</th>
+        <th nzWidth="10%">填报次数</th>
+        <th nzWidth="25%">数据说明</th>
+        <th nzWidth="25%">填报说明</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nzTable.data">
+        <tr>
+          <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.id]"></td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.age }}</td>
+          <td>{{ data.address }}</td>
+          <td>{{ data.address1 }}</td>
+          <td>
+            <button nz-button nzSize="small" nzType="default" (click)="open()">填报</button>
+            <button nz-button nzSize="small" nzType="primary" (click)="openin()">导入</button>
+            <button nz-button nzSize="small" nzType="default" (click)="openout()">导出</button>
+
+          </td>
+        </tr>
+        <tr [nzExpand]="mapOfExpandData[data.id]">
+          <td></td>
+          <td colspan="6">{{ data.description }}</td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+</nz-card>
+
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+  [nzMaskClosable]="false" nzTitle="表2.总校教师基本情况" nzPlacement="right" [nzWidth]="720" [nzVisible]="visible"
+  (nzOnClose)="close()">
+  <form nz-form>
+    <div nz-row nzGutter="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Name</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="please enter user name" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Url</nz-form-label>
+          <nz-form-control>
+            <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
+              <input type="text" nz-input placeholder="please enter url" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row nzGutter="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Owner</nz-form-label>
+          <nz-form-control>
+            <nz-select nzPlaceHolder="Please select an owner"></nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Type</nz-form-label>
+          <nz-form-control>
+            <nz-range-picker></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row nzGutter="8">
+      <div nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label>文件上传</nz-form-label>
+          <nz-form-control>
+            <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/" [nzFileList]="fileList">
+              <button nz-button><i nz-icon nzType="upload"></i><span>上传文件资料</span></button>
+            </nz-upload>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+  <div class="footer" style="position: absolute;
+  bottom: 0px;
+  width: 100%;
+  border-top: 1px solid rgb(232, 232, 232);
+  padding: 10px 16px;
+  text-align: right;
+  left: 0px;
+  background: #fff;">
+    <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancel</span></button>
+    <button type="button" (click)="close()" class="ant-btn ant-btn-primary"><span>Submit</span></button>
+  </div>
+</nz-drawer>
+
+
+<nz-drawer [nzClosable]="false" [nzVisible]="outvisible" [nzWidth]="360" nzPlacement="right" nzTitle="数据导出"
+  (nzOnClose)="closeout()">
+  <button nz-button (click)="download()">导出</button>
+  <st [data]="users" [ps]="12" [columns]="columns" class="mt-sm"></st>
+</nz-drawer>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="invisible" [nzWidth]="360" nzPlacement="right" nzTitle="数据导入"
+  (nzOnClose)="closein()">
+  <input type="file" (change)="change($event)" multiple="false" class="ml-sm" />
+  <p class="mt-sm">result: {{data | json}}</p>
+  <div class="footer" style="position: absolute;
+    bottom: 0px;
+    width: 100%;
+    border-top: 1px solid rgb(232, 232, 232);
+    padding: 10px 16px;
+    text-align: right;
+    left: 0px;
+    background: #fff;">
+    <button type="button" (click)="closein()" class="ant-btn" style="margin-right: 8px;"><span>Cancel</span></button>
+    <button type="button" (click)="closein()" class="ant-btn ant-btn-primary"><span>Submit</span></button>
+  </div>
+
+</nz-drawer>

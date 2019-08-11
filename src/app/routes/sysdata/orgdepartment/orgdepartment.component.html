@@ -1,0 +1,31 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <button (click)="addInfo()" nz-button nzType="primary">新增部门</button></ng-template>
+</page-header>
+<nz-card>
+  <nz-table #deptTable nzBordered nzSize="small" [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzWidth="20%">部门名称</th>
+        <th>评估人员</th>
+        <th>对应指标</th>
+        <th>状态</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of deptTable.data;let i=index;">
+        <td>{{ data.bname }} </td>
+        <td></td>
+        <td></td>
+        <td><span [ngClass]="{'text-danger':data.status==false}">{{ data.status?'在用':'停用' }}</span>
+        </td>
+        <td>
+          <button nz-button nzSize="small" nzType="default" (click)="editInfo(data)">修改</button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button nz-button nzSize="small" nzType="danger" (click)="deleteConfirm(data.id)">删除</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>
